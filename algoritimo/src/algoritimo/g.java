@@ -41,11 +41,10 @@ public class g {
 			System.out.println("9ª opção: Menor valor dentro do Vetor.");
 
 			System.out.println("10ª opção: Para Organizar de forma Crescente");
-			System.out.println("11 opcao: percorrer vetor");
 
-			System.out.println("Digite 0 para sair.");
-
+			System.out.println("11ª opção: Buscar valor específico no vetor");
 			System.out.println("");
+			System.out.println("Digite 0 para sair.");
 
 			System.out.println("Digite a opção desejada:");
 
@@ -116,12 +115,16 @@ public class g {
 				break;
 
 			case 11:
-				algumacoisa(vetor);
+
+				buscaEspec(vetor);
+
+				break;
+
 			case 0:
 
 				System.out.println("Fim do algoritimo");
 
-				break;
+				return;
 
 			default:
 
@@ -372,23 +375,94 @@ public class g {
 		System.out.println("Vetor Organizado");
 
 		for (int x = 0; x < vetor.length; x++) {
+			if (x < vetor.length - 1) {
 
-			System.out.print(vetor[x] + " ");
+				System.out.print(vetor[x] + ",");
+
+			} else {
+
+				System.out.println(vetor[x]);
+
+				System.out.println(" ");
+
+			}
 
 		}
-
-		System.out.println(" ");
 
 		return vetor;
 
 	}
 
-	public static int[] algumacoisa(int[] vetor) {
-		System.out.println("Numeros do vetor");
-		for (int i : vetor) {
-			System.out.println(i);
-		}
-		return vetor;
-	}
+	public static void buscaEspec(int[] vetor) {
 
+		Scanner t = new Scanner(System.in);
+		System.out.println("Voce deseja ordenar o vetor para a busca ou não?");
+		String ordenar = t.nextLine();
+		if (ordenar.equalsIgnoreCase("ordenar")) {
+			Arrays.sort(vetor);
+
+			System.out.println("Qual número você deseja achar?");
+
+			int busca = t.nextInt();
+
+			int inicio = 0;
+
+			int fim = vetor.length - 1;
+
+			boolean encontrado = false;
+
+			while (inicio <= fim) {
+
+				int meio = inicio + (fim - inicio) / 2;
+
+				if (vetor[meio] == busca) {
+
+					System.out.println("Valor encontrado no índice: " + meio);
+
+					encontrado = true;
+
+					break;
+				}
+
+				else if (vetor[meio] < busca) {
+
+					inicio = meio + 1;
+
+				} else {
+
+					fim = meio - 1;
+
+				}
+
+			}
+
+			if (!encontrado) {
+
+				System.out.println("Valor não encontrado no vetor.");
+
+			}
+
+			System.out.println(" ");
+
+		} else {
+			System.out.println("Qual número você deseja achar?");
+			int busca = t.nextInt();
+			boolean encontrado = false;
+
+			for (int c = 0; c < vetor.length; c++) {
+				if (vetor[c] == busca) {
+					System.out.println("Valor encontrado no índice: " + c);
+					encontrado = true;
+					break;
+				}
+			}
+
+			if (!encontrado) {
+				System.out.println("Valor não encontrado no vetor.");
+			}
+
+			System.out.println(" ");
+
+		}
+	}
 }
